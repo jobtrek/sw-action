@@ -1,0 +1,39 @@
+name: Example Workflow to use sw-action
+  
+on:
+  pull_request: # Run the action for each merged pull request
+    types:
+      - closed
+    branches:
+      - main
+  push:         # Run the action for new version tags pushed
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  wipe-solutions:
+    name: Solution wiper
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the current repository (the one with the solutions)
+        uses: actions/checkout@v4
+        with:
+          path: main
+      
+      - name: Checkout the destination repository (where we want to make a pull request without solutions)
+        uses: actions/checkout@v4
+        with:
+          repository: organisation/destination-repository
+          path: dest
+      
+      - name: Whipe solutions
+        uses: jobtrek/sw-action@v1
+        with:
+          path: main
+          lang: rust
