@@ -11,6 +11,10 @@ on:
       - "v*"
   workflow_dispatch:
 
+concurrency:
+  group: cd-copy-wiped-exercices-to-des-repository
+  cancel-in-progress: true
+
 permissions:
   contents: read
   packages: read
@@ -31,9 +35,29 @@ jobs:
         with:
           repository: organisation/destination-repository
           path: dest
+          token: ${{ secrets.A_TOKEN_WITH_ACCESS_TO_DEST_REPOSITORY }}
       
       - name: Whipe solutions
         uses: jobtrek/sw-action@v1
         with:
           path: main
           lang: rust
+
+      - name: Modify and adapd code before copy to destination repository
+        run: |
+          rm -Rf .git
+          # Change readme, remove files, update file contents
+      
+      - name: Copy wiped code to destination repository
+        run: |
+          cp -r ./main/ ./dest/
+
+      - name: Creates pull request to destination repository
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.TOKEN_WITH_CONTENTS_AND_PUL_REQUEST_WRITE_ACCESS_ON_DEST_REPO }}
+          path: dest
+          commit-message: Your commit message - ${{ github.ref }}
+          branch: new-exercices-version/from-${{ github.ref }}
+          title: New version of the exercices from ....
+          labels: your-label
