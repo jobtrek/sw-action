@@ -1,22 +1,23 @@
-FROM rust:1.79-alpine
+FROM rust:1.79.0-alpine3.20 AS build
 
 # Install the dependencies
-RUN apk add build-base
-RUN apk add --no-cache musl-dev
+RUN apk add --no-cache build-base=~0.5 musl-dev=~1.2.5
 RUN cargo install ast-grep --locked
 
 # Get a specific version of the sw project
-RUN git clone --depth 1 --branch v0.1.2 git@github.com:jobtrek/sw.git
+RUN apk add --no-cache git=2.45.2-r0
+# When making a release, update the tag to match the wanted sw release : https://github.com/jobtrek/sw/releases
+RUN git clone --depth 1 --branch v0.1.3 https://github.com/jobtrek/sw.git
 WORKDIR /sw
 RUN cargo build --release
 
 # Final image
 FROM alpine:3.20
-COPY --from=0 /sw/target/release/sw /usr/local/bin/sw
-COPY --from=0 /sw/sgconfig.yml /etc/jobtrek/sw/sgconfig.yml
-COPY --from=0 /sw/ast-grep-rules /etc/jobtrek/sw/ast-grep-rules
-COPY --from=0 /usr/local/cargo/bin/ast-grep /usr/local/bin/ast-grep
-RUN apk add --no-cache fd
+COPY --from=build /sw/target/release/sw /usr/local/bin/sw
+COPY --from=build /sw/sgconfig.yml /etc/jobtrek/sw/sgconfig.yml
+COPY --from=build /sw/ast-grep-rules /etc/jobtrek/sw/ast-grep-rules
+COPY --from=build /usr/local/cargo/bin/ast-grep /usr/local/bin/ast-grep
+RUN apk add --no-cache fd=~10.0.0
 
 # Set the working directory inside the container.
 WORKDIR /usr/src
