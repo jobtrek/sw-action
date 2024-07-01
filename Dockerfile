@@ -20,10 +20,11 @@ COPY --from=build /usr/local/cargo/bin/ast-grep /usr/local/bin/ast-grep
 RUN apk add --no-cache fd=~10.0.0
 
 # Set the working directory inside the container.
-WORKDIR /usr/src
+WORKDIR /github/workspace
 
 # Copy any source file(s) required for the action.
-COPY entrypoint.sh .
+COPY entrypoint.sh /entrypoint.sh
 
 # Configure the container to be run as an executable.
-ENTRYPOINT ["/usr/src/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
+
