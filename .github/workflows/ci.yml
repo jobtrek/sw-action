@@ -44,11 +44,31 @@ jobs:
           push: true
           tags: ${{ env.TEST_TAG }}
 
+      - name: Pull tests
+        id: tests
+        uses: actions/checkout@v4
+        with:
+          repository: jobtrek/sw
+          path: test
+
       - name: Run the Container
         id: run
         env:
-          INPUT_WHO_TO_GREET: Mona Lisa Octocat
+          INPUT_PATH: test/test
+          INPUT_LAND: "rs js ts"
         run: |
           docker run \
-            --env INPUT_WHO_TO_GREET="${{ env.INPUT_WHO_TO_GREET }}" \
-            --rm ${{ env.TEST_TAG }}
+            --env INPUT_PATH=$INPUT_PATH \
+            --env INPUT_LAND=$INPUT_LAND \
+            --rm \
+            ${{ env.TEST_TAG }}
+
+      - name: Test if the test passed
+        id: check
+        run: |
+          if diff -rq test/test test/expected; then
+            echo "Test passed"
+          else
+            echo "Test failed"
+            exit 1
+          fi
