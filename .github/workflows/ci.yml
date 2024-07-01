@@ -66,9 +66,11 @@ jobs:
       - name: Test if the test passed
         id: check
         run: |
+          tree test
           if diff -rq test/test test/expected; then
             echo "Test passed"
           else
             echo "Test failed"
+            diff -rq test/test test/expected
             exit 1
           fi
