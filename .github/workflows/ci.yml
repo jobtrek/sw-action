@@ -58,8 +58,8 @@ jobs:
           INPUT_LAND: "rs js ts"
         run: |
           docker run \
-            --env INPUT_PATH=$INPUT_PATH \
-            --env INPUT_LAND=$INPUT_LAND \
+            --env INPUT_PATH='$INPUT_PATH' \
+            --env INPUT_LAND='$INPUT_LAND' \
             --rm \
             ${{ env.TEST_TAG }}
 
