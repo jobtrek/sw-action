@@ -9,5 +9,6 @@ sw $INPUT_PATH -e $EXTENSIONS
 # Test if the command was successful
 echo "Test: $(diff -rq test/test test/expected)"
 tree .
+pwd
 
 exit 0
