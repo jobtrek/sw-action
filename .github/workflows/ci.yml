@@ -70,6 +70,6 @@ jobs:
             echo "Test passed"
           else
             echo "Test failed"
-            diff -rq test/test test/expected
+            diff -r test/test test/expected
             exit 1
           fi
