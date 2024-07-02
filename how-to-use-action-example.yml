@@ -41,7 +41,7 @@ jobs:
         uses: jobtrek/sw-action@v1
         with:
           path: main
-          lang: "rs ts"
+          lang: "rs,ts"
 
       - name: Modify and adapd code before copy to destination repository
         run: |
