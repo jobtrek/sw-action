@@ -57,6 +57,7 @@ jobs:
           INPUT_LAND: "rs js ts"
         run: |
           docker run \
+            --volume ${{ github.workspace }}:/github/workspace \
             --env INPUT_PATH='$INPUT_PATH' \
             --env INPUT_LAND='$INPUT_LAND' \
             --rm \
