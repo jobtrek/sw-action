@@ -1,22 +1,27 @@
-name: The name of your action here
-description: Provide a description here
-author: Your name or organization here
+name: 'Solution Wiper'
+description: 'Removes all solutions from exercises, solutions start with a comment "Write your code here" and end with the end of the scope.'
+author: 'Jobtrek'
 
 # Define your inputs here.
 inputs:
-  who-to-greet:
-    description: Your input description here
-    required: true
-    default: World
+  path:
+    description: 'The path to the file or directory to wipe solutions from.'
+    required: false
+    default: '.'
+  lang:
+    description: 'The languages of the files to wipe solutions from.'
+    required: false
+    default: 'rs,js,ts'
 
 # Define your outputs here.
 outputs:
-  greeting:
-    description: Your output description here
+  wiped:
+    description: 'The path to the file or directory with wiped solutions.'
 
 # Update the image repository and tag below.
 runs:
   using: docker
   image: docker://ghcr.io/actions/container-prebuilt-action:latest
   env:
-    INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+    INPUT_PATH: ${{ inputs.path }}
+    INPUT_LANG: ${{ inputs.lang }}
