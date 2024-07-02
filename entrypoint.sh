@@ -4,6 +4,7 @@
 EXTENSIONS=$(echo $INPUT_LANG | sed 's/ / -e /g')
 
 # Run sw
+echo "sw $INPUT_PATH -e $EXTENSIONS"
 sw $INPUT_PATH -e $EXTENSIONS
 
 # Test if the command was successful
