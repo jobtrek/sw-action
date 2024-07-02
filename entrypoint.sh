@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 # Add " -e " before each languages
-EXTENSIONS=$(echo $INPUT_LANG | sed 's/ / -e /g')
+EXTENSIONS=$(echo $INPUT_LANG | sed 's/,/ -e /g')
 
 # Run sw
 eval "sw $INPUT_PATH -e $EXTENSIONS"

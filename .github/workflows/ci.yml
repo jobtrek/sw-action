@@ -53,13 +53,13 @@ jobs:
       - name: Run the Container
         id: run
         env:
-          INPUT_PATH: test/test
-          INPUT_LANG: "rs js ts"
+          INPUT_PATH: "test/test"
+          INPUT_LANG: "rs,js,ts"
         run: |
           docker run \
             --volume ${{ github.workspace }}:/github/workspace \
-            --env INPUT_PATH='$INPUT_PATH' \
-            --env INPUT_LANG='$INPUT_LANG' \
+            --env INPUT_PATH="$INPUT_PATH" \
+            --env INPUT_LANG="$INPUT_LANG" \
             --rm \
             ${{ env.TEST_TAG }}
 
