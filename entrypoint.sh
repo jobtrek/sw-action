@@ -6,4 +6,8 @@ EXTENSIONS=$(echo $INPUT_LANG | sed 's/ / -e /g')
 # Run sw
 sw $INPUT_PATH -e $EXTENSIONS
 
+# Test if the command was successful
+echo -n "Test: "
+diff -rq test/test test/expected
+
 exit 0
