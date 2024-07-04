@@ -11,7 +11,7 @@ inputs:
   lang:
     description: 'The languages of the files to wipe solutions from.'
     required: false
-    default: 'rs,js,ts'
+    default: 'rs,js,ts,java'
 
 # Define your outputs here.
 outputs:
