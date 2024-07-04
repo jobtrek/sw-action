@@ -1,5 +1,5 @@
 name: Example Workflow to use sw-action
-  
+
 on:
   pull_request: # Run the action for each merged pull request
     types:
@@ -29,25 +29,25 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: main
-      
+
       - name: Checkout the destination repository (where we want to make a pull request without solutions)
         uses: actions/checkout@v4
         with:
           repository: organisation/destination-repository
           path: dest
           token: ${{ secrets.A_TOKEN_WITH_ACCESS_TO_DEST_REPOSITORY }}
-      
+
       - name: Whipe solutions
         uses: jobtrek/sw-action@v1
         with:
           path: main
-          lang: rust
+          lang: "rs,ts"
 
       - name: Modify and adapd code before copy to destination repository
         run: |
           rm -Rf .git
           # Change readme, remove files, update file contents
-      
+
       - name: Copy wiped code to destination repository
         run: |
           cp -r ./main/ ./dest/
