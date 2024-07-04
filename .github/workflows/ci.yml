@@ -55,7 +55,7 @@ jobs:
         id: run
         env:
           INPUT_PATH: "test/test"
-          INPUT_LANG: "rs,js,ts"
+          INPUT_LANG: "rs,js,ts,java"
         run: |
           docker run \
             --volume ${{ github.workspace }}:/github/workspace \
