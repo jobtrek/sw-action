@@ -1,0 +1,70 @@
+name: Example Workflow to use sw-action
+
+# We recommend to use this action on release, for example with tag v*
+on:
+  pull_request: # Run the action for each merged pull request
+    types:
+      - closed
+    branches:
+      - main
+  workflow_dispatch:
+  push:         # Run the action for new version tags pushed
+    tags:
+      - "v*"
+
+concurrency:
+  group: empty-exercise
+  cancel-in-progress: true
+
+env:
+  DESTINATION_REPOSITORY: organization/repository
+
+jobs:
+  empty_exercise:
+    name: Clear all the code inside the exercises
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout the current repository
+        uses: actions/checkout@v4
+        with:
+          path: main
+
+      - name: Checkout the destination repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.DESTINATION_REPOSITORY }}
+          path: dest
+          token: ${{ secrets.TOKEN_WITH_CONTENTS_AND_PUL_REQUEST_WRITE_ACCESS_ON_DEST_REPO }}
+
+      - name: Wipe the solutions
+        uses: jobtrek/sw-action@v1
+        with:
+          path: main/src
+          lang: "rs"
+
+      - name: Clear destination repository
+        # We want to remove all the files in the destination repository except the .git folder
+        # that way we can keep the history while being sure to have the latest version of the exercises.
+        run: |
+          sudo apt-get update && sudo apt-get install -y fd-find
+          rm -f $(fdfind . dest -HE .git --type f)
+
+      - name: Copy the exercices in the destination repository
+        # We use a ".exerciseignore" file to ignore the files we don't want to copy, like the .github folder for example.
+        run: |
+          cd main
+          cp -r --parents $(fdfind . --ignore-file .exerciceignore -HE .git --type f) ../dest/
+
+      - name: Creates pull request to destination repository
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.TOKEN_WITH_CONTENTS_AND_PUL_REQUEST_WRITE_ACCESS_ON_DEST_REPO }}
+          path: dest
+          commit-message: "feat: Update Exercices - ${{ github.ref_name }}"
+          branch: "update-exercices"
+          title: "feat: Update Exercices - ${{ github.ref_name }}"
+          body: |
+            Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action
+            and [solution wiper](https://github.com/jobtrek/sw-action/) GitHub action.
+
