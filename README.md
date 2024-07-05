@@ -13,18 +13,18 @@ You need to set up a workflow that :
 
 1. Check out the code of your repository.
 1. Run the SW-action to wipe the solutions.
-1. Copy the wiped files to a new repo or branch.
-1. Commit the changes to the new repo or branch.
-1. Make a pull request to the corresponding repo to propose the new wiped
+1. Copy the wiped files to a new repository or branch.
+1. Commit the changes to the new repository or branch.
+1. Make a pull request to the corresponding repository to propose the new wiped
 exercises.
 
 ### Example action
 
 - Here's a [simple example](action-example/simple-action.yml) of a workflow
 that uses the SW-action to wipe the solutions of some exercises and commit
-the changes to another repo,
+the changes to another repository,
 - Here's [another example](action-examplel/with-ignore-file.yml) wich uses a
-`.exerciseignore` to specify wich files shouldn't be copied to the new repo.
+`.exerciseignore` to specify wich files shouldn't be copied to the new repository.
 
 ### Inputs
 
