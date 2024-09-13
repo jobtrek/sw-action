@@ -1,4 +1,4 @@
-FROM rust:1.80.1-alpine3.20 AS build
+FROM rust:1.81.0-alpine3.20 AS build
 
 # Install the dependencies
 RUN apk add --no-cache build-base=~0.5 musl-dev=~1.2.5
