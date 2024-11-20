@@ -7,7 +7,7 @@ RUN cargo install ast-grep --locked
 # Get a specific version of the sw project
 RUN apk add --no-cache git=2.45.2-r0
 # When making a release, update the tag to match the wanted sw release : https://github.com/jobtrek/sw/releases
-RUN git clone --depth 1 --branch v0.2.5 https://github.com/jobtrek/sw.git
+RUN git clone --depth 1 --branch v0.2.7 https://github.com/jobtrek/sw.git
 WORKDIR /sw
 RUN cargo build --release
 
