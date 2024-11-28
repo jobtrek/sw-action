@@ -1,13 +1,13 @@
 # SW action
 
-This action can be used to set up [SW](github.com/jobtrek/sw) on your GitHub
+This action can be used to set up [SW](https://github.com/jobtrek/sw) on your GitHub
 action CD pipelines.
 
 By default, the action will check your code with the same defaults as
 [SW](https://github.com/jobtrek/sw?tab=readme-ov-file#defaults). You can pass
 specific configuration directly to SW from the action parameters.
 
-> v1.1.2
+> v1.1.4
 
 ## Use this action in your repository
 
