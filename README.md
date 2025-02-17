@@ -25,7 +25,7 @@ exercises.
 - Here's a [simple example](action-example/simple-action.yml) of a workflow
 that uses the SW-action to wipe the solutions of some exercises and commit
 the changes to another repository,
-- Here's [another example](action-examplel/with-ignore-file.yml) wich uses a
+- Here's [another example](action-example/with-ignore-file.yml) wich uses a
 `.exerciseignore` to specify wich files shouldn't be copied to the new repository.
 
 ### Inputs
