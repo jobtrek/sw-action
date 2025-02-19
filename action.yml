@@ -1,5 +1,7 @@
 name: 'Solution Wiper'
-description: 'Removes all solutions from exercises, solutions start with a comment "Write your code here" and end with the end of the scope.'
+description:
+  'Removes all solutions from exercises, solutions start with a comment "Write
+  your code here" and end with the end of the scope.'
 author: 'Jobtrek'
 
 # Define your inputs here.
