@@ -49,13 +49,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: jobtrek/sw
-          ref: v0.1.5
+          ref: v0.4.1
 
       - name: Run the Container
         id: run
         env:
           INPUT_PATH: 'test/test'
-          INPUT_LANG: 'rs,js,ts,java'
+          INPUT_LANG: 'rs,js,ts,java,php'
         run: |
           docker run \
             --volume ${{ github.workspace }}:/github/workspace \

@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-# Add " -e " before each languages
+# Add " -e " before each languages (not the first)
 EXTENSIONS=$(echo "$INPUT_LANG" | sed 's/,/ -e /g')
 
 # Run sw
