@@ -11,7 +11,7 @@ WORKDIR /sw
 RUN cargo build --release
 
 # Final image
-FROM alpine:3.21
+FROM alpine:3.22
 COPY --from=build /sw/target/release/sw /usr/local/bin/sw
 RUN apk add --no-cache fd=~10.2.0
 
