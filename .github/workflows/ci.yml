@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Docker BuildX
         id: setup-buildx
@@ -46,7 +46,7 @@ jobs:
 
       - name: Pull tests
         id: tests
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: jobtrek/sw
           ref: v0.4.8
