@@ -11,7 +11,9 @@ WORKDIR /sw
 RUN cargo build --release
 
 # Final image
+# checkov:skip=CKV_DOCKER_3:GitHub Actions require running as root
 FROM alpine:3.22
+HEALTHCHECK NONE
 COPY --from=build /sw/target/release/sw /usr/local/bin/sw
 RUN apk add --no-cache fd=~10.2.0
 
