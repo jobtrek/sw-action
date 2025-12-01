@@ -1,24 +1,24 @@
-name: 'Solution Wiper'
+name: "Solution Wiper"
 description:
   'Removes all solutions from exercises, solutions start with a comment "Write
   your code here" and end with the end of the scope.'
-author: 'Jobtrek'
+author: "Jobtrek"
 
 # Define your inputs here.
 inputs:
   path:
-    description: 'The path to the file or directory to wipe solutions from.'
+    description: "The path to the file or directory to wipe solutions from."
     required: false
-    default: '.'
+    default: "."
   lang:
-    description: 'The languages of the files to wipe solutions from.'
+    description: "The languages of the files to wipe solutions from."
     required: false
-    default: 'rs,js,ts,java,php'
+    default: "rs,js,ts,java,php"
 
 # Define your outputs here.
 outputs:
   wiped:
-    description: 'The path to the file or directory with wiped solutions.'
+    description: "The path to the file or directory with wiped solutions."
 
 # Update the image repository and tag below.
 runs:
