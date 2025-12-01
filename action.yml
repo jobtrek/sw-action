@@ -23,7 +23,7 @@ outputs:
 # Update the image repository and tag below.
 runs:
   using: docker
-  image: docker://ghcr.io/jobtrek/sw-action:v1.1.8
+  image: docker://ghcr.io/jobtrek/sw-action:v1.1.9
   env:
     INPUT_PATH: ${{ inputs.path }}
     INPUT_LANG: ${{ inputs.lang }}
