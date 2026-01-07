@@ -1,4 +1,4 @@
-FROM rust:1.91.1-alpine3.22 AS build
+FROM rust:1.92.0-alpine3.22 AS build
 
 # Install the dependencies
 RUN apk add --no-cache build-base=~0.5 musl-dev=~1.2.5
@@ -12,7 +12,7 @@ RUN cargo build --release
 
 # Final image
 # checkov:skip=CKV_DOCKER_3:GitHub Actions require running as root
-FROM alpine:3.22
+FROM alpine:3.23
 HEALTHCHECK NONE
 COPY --from=build /sw/target/release/sw /usr/local/bin/sw
 RUN apk add --no-cache fd=~10.2.0
