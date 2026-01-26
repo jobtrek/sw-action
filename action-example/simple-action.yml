@@ -7,9 +7,9 @@ on:
     branches:
       - main
   workflow_dispatch:
-  push:         # Run the action for new version tags pushed
+  push: # Run the action for new version tags pushed
     tags:
-      - "v*"
+      - 'v*'
 
 concurrency:
   group: cd-copy-wiped-exercices-to-des-repository
@@ -30,7 +30,9 @@ jobs:
         with:
           path: main
 
-      - name: Checkout the destination repository (where we want to make a pull request without solutions)
+      - name:
+          Checkout the destination repository (where we want to make a pull
+          request without solutions)
         uses: actions/checkout@v4
         with:
           repository: organisation/destination-repository
@@ -41,7 +43,7 @@ jobs:
         uses: jobtrek/sw-action@v1
         with:
           path: main
-          lang: "rs,ts"
+          lang: 'rs,ts'
 
       - name: Modify and adapd code before copy to destination repository
         run: |
@@ -55,7 +57,10 @@ jobs:
       - name: Creates pull request to destination repository
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.TOKEN_WITH_CONTENTS_AND_PUL_REQUEST_WRITE_ACCESS_ON_DEST_REPO }}
+          token:
+            ${{
+            secrets.TOKEN_WITH_CONTENTS_AND_PUL_REQUEST_WRITE_ACCESS_ON_DEST_REPO
+            }}
           path: dest
           commit-message: Your commit message - ${{ github.ref }}
           branch: new-exercices-version/from-${{ github.ref }}
