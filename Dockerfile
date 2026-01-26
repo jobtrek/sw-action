@@ -30,4 +30,4 @@ RUN addgroup -S actiongroup && adduser -S actionuser -G actiongroup && \
 USER actionuser
 
 # Configure the container to be run as an executable.
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/entrypoint.sh"]
