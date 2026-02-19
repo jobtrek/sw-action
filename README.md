@@ -7,7 +7,7 @@ By default, the action will check your code with the same defaults as
 [SW](https://github.com/jobtrek/sw?tab=readme-ov-file#defaults). You can pass
 specific configuration directly to SW from the action parameters.
 
-> v1.1.9 with [sw 0.5.1](https://github.com/jobtrek/sw/tree/v0.5.1)
+> v1.2.0 with [sw 0.6.0](https://github.com/jobtrek/sw/tree/v0.6.0)
 
 ## Use this action in your repository
 
