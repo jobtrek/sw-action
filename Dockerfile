@@ -22,13 +22,7 @@ WORKDIR /github/workspace
 # Copy any source file(s) required for the action.
 COPY entrypoint.sh /entrypoint.sh
 
-# Create a non-root user and switch to it
-RUN addgroup -S actiongroup && adduser -S actionuser -G actiongroup && \
-    chown -R actionuser:actiongroup /github/workspace && \
-    chown actionuser:actiongroup /entrypoint.sh && \
-    chmod +x /entrypoint.sh
 
-USER actionuser
 
 # Configure the container to be run as an executable.
 ENTRYPOINT ["/entrypoint.sh"]
