@@ -4,7 +4,7 @@ FROM rust:1.93.1-alpine3.23 AS build
 RUN apk add --no-cache build-base=~0.5 musl-dev=~1.2.5 git=~2.52.0
 
 # When making a release, update the tag to match the wanted sw release : https://github.com/jobtrek/sw/releases
-RUN git clone --depth 1 --branch v0.5.4 https://github.com/jobtrek/sw.git
+RUN git clone --depth 1 --branch v0.6.6 https://github.com/jobtrek/sw.git
 
 WORKDIR /sw
 RUN cargo build --release
