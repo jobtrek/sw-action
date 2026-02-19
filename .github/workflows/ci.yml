@@ -48,7 +48,7 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: jobtrek/sw
-          ref: v0.5.4
+          ref: v0.6.0
 
       - name: Run the Container
         id: run
