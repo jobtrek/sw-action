@@ -17,17 +17,17 @@ COPY --from=build /sw/target/release/sw /usr/local/bin/sw
 RUN apk add --no-cache fd=~10.2.0
 
 # Set the working directory inside the container.
-WORKDIR /usr/src
+WORKDIR /github/workspace
 
 # Copy any source file(s) required for the action.
-COPY entrypoint.sh .
+COPY entrypoint.sh /entrypoint.sh
 
 # Create a non-root user and switch to it
 RUN addgroup -S actiongroup && adduser -S actionuser -G actiongroup && \
-    chown -R actionuser:actiongroup /usr/src && \
-    chmod +x /usr/src/entrypoint.sh
+    chown -R actionuser:actiongroup /github/workspace && \
+    chmod +x /entrypoint.sh
 
 USER actionuser
 
 # Configure the container to be run as an executable.
-ENTRYPOINT ["/usr/src/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
