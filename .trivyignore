@@ -1,0 +1,3 @@
+# GitHub Docker container actions must run as root:
+# https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions#user
+AVD-DS-0002
