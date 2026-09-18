@@ -28,6 +28,8 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Docker BuildX
         id: setup-buildx
@@ -48,7 +50,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: jobtrek/sw
-          ref: v1.0.3
+          ref: v1.0.7
+          persist-credentials: false
 
       - name: Run the Container
         id: run

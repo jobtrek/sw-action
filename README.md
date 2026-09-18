@@ -7,7 +7,7 @@ By default, the action will check your code with the same defaults as
 [SW](https://github.com/jobtrek/sw?tab=readme-ov-file#defaults). You can pass
 specific configuration directly to SW from the action parameters.
 
-> v1.6.0 with [sw 1.0.3](https://github.com/jobtrek/sw/tree/v1.0.3)
+> v1.7.0 with [sw 1.0.7](https://github.com/jobtrek/sw/tree/v1.0.7)
 
 ## Use this action in your repository
 
@@ -25,8 +25,8 @@ You need to set up a workflow that :
 - Here's a [simple example](action-example/simple-action.yml) of a workflow that
   uses the SW-action to wipe the solutions of some exercises and commit the
   changes to another repository,
-- Here's [another example](action-example/with-ignore-file.yml) wich uses a
-  `.exerciseignore` to specify wich files shouldn't be copied to the new
+- Here's [another example](action-example/with-ignore-file.yml) which uses a
+  `.exerciseignore` to specify which files shouldn't be copied to the new
   repository.
 
 ### Inputs
