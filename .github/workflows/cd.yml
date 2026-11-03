@@ -17,14 +17,15 @@ env:
   CONTAINER_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
   MANIFEST_PATH: .version
 
-permissions:
-  contents: write
-  packages: write
+permissions: {}
 
 jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     # Ignore Dependabot pull requests.
     if: |
@@ -38,7 +39,9 @@ jobs:
       version: ${{ steps.tag.outputs.version }}
 
     steps:
-      - name: Checkout
+      # issue-ops/semver pushes the version tags with git, so the checkout must
+      # keep its credentials.
+      - name: Checkout # zizmor: ignore[artipacked]
         id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -63,6 +66,10 @@ jobs:
     name: Publish Container Image
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     needs: release
 
     steps:
@@ -72,6 +79,7 @@ jobs:
         with:
           fetch-tags: true
           ref: main
+          persist-credentials: false
 
       # Create the list of image tags that will be published. If a prerelease is
       # being published (e.g. `1.2.3-alpha.4`), only the prerelease tag will be
@@ -84,9 +92,11 @@ jobs:
       - name: Set Image Tags
         id: tags
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
         with:
           script: |
-            const version = '${{ needs.release.outputs.version }}'
+            const version = process.env.VERSION
 
             // Check if prerelease (e.g. 1.2.3-alpha.4)
             if (version.includes('-')) {
@@ -114,7 +124,7 @@ jobs:
       # Authenticate to the container registry
       - name: Authenticate to Container Registry
         id: login
-        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
         with:
           registry: ${{ env.CONTAINER_REGISTRY }}
           username: ${{ env.CONTAINER_REGISTRY_USERNAME }}
