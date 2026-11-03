@@ -7,7 +7,7 @@ By default, the action will check your code with the same defaults as
 [SW](https://github.com/jobtrek/sw?tab=readme-ov-file#defaults). You can pass
 specific configuration directly to SW from the action parameters.
 
-> v1.7.0 with [sw 1.0.7](https://github.com/jobtrek/sw/tree/v1.0.7)
+> v1.8.0 with [sw 1.0.10](https://github.com/jobtrek/sw/tree/v1.0.10)
 
 ## Use this action in your repository
 
@@ -31,10 +31,10 @@ You need to set up a workflow that :
 
 ### Inputs
 
-| Name   | Description                                                                         | Required | Default         |
-| ------ | ----------------------------------------------------------------------------------- | -------- | --------------- |
-| `path` | The path to the directory containing the code to wipe                               | false    | `.`             |
-| `lang` | The languages of the code you want to wipe, separated by a comma and without spaces | false    | `rs,js,ts,java` |
+| Name   | Description                                                                         | Required | Default             |
+| ------ | ----------------------------------------------------------------------------------- | -------- | ------------------- |
+| `path` | The path to the directory containing the code to wipe                               | false    | `.`                 |
+| `lang` | The languages of the code you want to wipe, separated by a comma and without spaces | false    | `rs,js,ts,java,php` |
 
 ### Outputs
 
