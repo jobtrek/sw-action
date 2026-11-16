@@ -1,7 +1,7 @@
-FROM rust:1.99.1-alpine3.24 AS build
+FROM rust:1.100.0-alpine3.24 AS build
 
 # Install the dependencies
-RUN apk add --no-cache build-base=~0.5 musl-dev=~1.2.6 git=~2.54.0
+RUN apk add --no-cache build-base=~0.5 musl-dev=~1.2.6 git=~2.54.1
 
 # When making a release, update the tag to match the wanted sw release : https://github.com/jobtrek/sw/releases
 RUN git clone --depth 1 --branch v1.0.10 https://github.com/jobtrek/sw.git
